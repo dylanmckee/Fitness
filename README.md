@@ -1,2 +1,2 @@
-# Fitness
+# iOS Fitness App
  
