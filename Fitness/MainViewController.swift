@@ -40,8 +40,9 @@ class MainViewController: UIViewController, UITableViewDelegate {
     
     
 
+    @IBOutlet var onLogoutButton: UIView!
     
-    @IBAction func onLogoutButton(_ sender: Any) {
+    @IBAction func onLogoutButton(_ sender: UIButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = main.instantiateViewController(withIdentifier: "LoginViewController")
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }

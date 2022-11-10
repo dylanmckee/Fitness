@@ -7,6 +7,7 @@
 
 import UIKit
 import JellyGif
+import AVFoundation
 
 class ExerciseViewController: UIViewController {
 
@@ -19,6 +20,9 @@ class ExerciseViewController: UIViewController {
         let imageView = UIImageView(image: imageURL)
         imageView.frame = CGRect(x:20.0,y:390.0, width: self.view.frame.size.width - 90, height: 200.0)
         view.addSubview(imageView)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "Back", style: .plain, target: nil, action: nil)
+
 //        let url = URL(string: gifURL)!
 //        let imageView2 = JellyGifImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
@@ -27,17 +31,19 @@ class ExerciseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     var seconds = 60
-    var timer = Timer()
+    private var timer: Timer?
     var isTimeRunning = false
     var resumeTapped = false
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBAction func onStartButton(_ sender: Any) {
-        runTimer()
+        if !isTimeRunning{
+            runTimer()
+        }
     }
     @IBAction func onPauseButton(_ sender: Any) {
         if self.resumeTapped == false {
-            timer.invalidate()
+            timer!.invalidate()
              self.resumeTapped = true
         } else {
              runTimer()
@@ -45,20 +51,35 @@ class ExerciseViewController: UIViewController {
         }
     }
     @IBAction func onResetButton(_ sender: Any) {
-        timer.invalidate()
+        timer!.invalidate()
         seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
         timerLabel.text = String(seconds)
+        isTimeRunning = false
 
     }
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ExerciseViewController.updateTimer)), userInfo: nil, repeats: true)
+        isTimeRunning = true
     }
     @objc func updateTimer() {
+        if seconds <= 0{
+            self.timer?.invalidate()
+            playAlarm()
+        }
         seconds -= 1     //This will decrement(count down)the seconds.
         timerLabel.text = String(seconds) //This will update the label.
     }
-    
-    
+
+    func playAlarm(){
+        let url = URL(fileURLWithPath: "/System/Library/Audio/UISounds/sms-received5.caf")
+        do {
+            let reps_sound_effect = try AVAudioPlayer(contentsOf: url)
+            reps_sound_effect.play()
+        } catch {
+            print("Error!")
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
