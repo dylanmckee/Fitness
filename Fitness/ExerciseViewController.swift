@@ -15,14 +15,14 @@ class ExerciseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let gifURL : String = "https://d205bpvrqc9yn1.cloudfront.net/0001.gif"
-//        let imageURL = UIImage.gifImageWithURL(gifURL)
-//        let imageView = UIImageView(image: imageURL)
-//        imageView.frame = CGRect(x:20.0,y:390.0, width: self.view.frame.size.width - 90, height: 200.0)
-//        view.addSubview(imageView)
-        let url = URL(string: gifURL)!
-        let imageView2 = JellyGifImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        let imageURL = UIImage.gifImageWithURL(gifURL)
+        let imageView = UIImageView(image: imageURL)
+        imageView.frame = CGRect(x:20.0,y:390.0, width: self.view.frame.size.width - 90, height: 200.0)
+        view.addSubview(imageView)
+//        let url = URL(string: gifURL)!
+//        let imageView2 = JellyGifImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-        imageView2.startGif(with: .localPath(url))
+       // imageView2.startGif(with: .localPath(url))
         //imageView.af.setImage(withURL: url)
         // Do any additional setup after loading the view.
     }
