@@ -130,23 +130,15 @@
                                 <rect key="frame" x="87" y="182" width="240" height="218"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBK-Ht-kDS">
-                                <rect key="frame" x="189" y="541" width="64" height="31"/>
+                                <rect key="frame" x="160" y="541" width="95" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Pause"/>
                                 <connections>
                                     <action selector="onPauseButton:" destination="mtU-ro-uS0" eventType="touchUpInside" id="6eL-ok-nf7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOy-G4-3fs">
-                                <rect key="frame" x="293" y="541" width="61" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Reset"/>
-                                <connections>
-                                    <action selector="onResetButton:" destination="mtU-ro-uS0" eventType="touchUpInside" id="Jhu-eF-s5u"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GYb-3l-uJe">
-                                <rect key="frame" x="93" y="541" width="56" height="31"/>
+                                <rect key="frame" x="46" y="541" width="88" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Start"/>
                                 <connections>
@@ -159,6 +151,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOy-G4-3fs">
+                                <rect key="frame" x="284" y="541" width="87" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Reset"/>
+                                <connections>
+                                    <action selector="onResetButton:" destination="mtU-ro-uS0" eventType="touchUpInside" id="Jhu-eF-s5u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JX1-9w-xa8"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -167,12 +167,12 @@
                             <constraint firstItem="PpN-6h-bnL" firstAttribute="leading" secondItem="JX1-9w-xa8" secondAttribute="leading" constant="60" id="1am-Qr-tNq"/>
                             <constraint firstItem="GYb-3l-uJe" firstAttribute="top" secondItem="PpN-6h-bnL" secondAttribute="bottom" constant="40" id="PWC-0b-UGn"/>
                             <constraint firstItem="pOf-9S-y4n" firstAttribute="top" secondItem="JX1-9w-xa8" secondAttribute="top" constant="30" id="QQe-LQ-g89"/>
-                            <constraint firstItem="LOy-G4-3fs" firstAttribute="leading" secondItem="YBK-Ht-kDS" secondAttribute="trailing" constant="40" id="QsS-aZ-tOo"/>
+                            <constraint firstItem="LOy-G4-3fs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YBK-Ht-kDS" secondAttribute="trailing" constant="40" id="QsS-aZ-tOo"/>
                             <constraint firstItem="JX1-9w-xa8" firstAttribute="trailing" secondItem="PpN-6h-bnL" secondAttribute="trailing" constant="60" id="R4D-ky-sBN"/>
                             <constraint firstItem="LOy-G4-3fs" firstAttribute="top" secondItem="PpN-6h-bnL" secondAttribute="bottom" constant="40" id="Spf-6e-BXZ"/>
-                            <constraint firstItem="YBK-Ht-kDS" firstAttribute="leading" secondItem="GYb-3l-uJe" secondAttribute="trailing" constant="40" id="U9B-cB-VJ2"/>
-                            <constraint firstItem="JX1-9w-xa8" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LOy-G4-3fs" secondAttribute="trailing" constant="60" id="a5F-Jl-zyC"/>
-                            <constraint firstItem="GYb-3l-uJe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JX1-9w-xa8" secondAttribute="leading" constant="60" id="d3f-nL-41s"/>
+                            <constraint firstItem="YBK-Ht-kDS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GYb-3l-uJe" secondAttribute="trailing" constant="40" id="U9B-cB-VJ2"/>
+                            <constraint firstItem="JX1-9w-xa8" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="LOy-G4-3fs" secondAttribute="trailing" constant="60" id="a5F-Jl-zyC"/>
+                            <constraint firstItem="GYb-3l-uJe" firstAttribute="leading" relation="lessThanOrEqual" secondItem="JX1-9w-xa8" secondAttribute="leading" constant="60" id="d3f-nL-41s"/>
                             <constraint firstItem="YBK-Ht-kDS" firstAttribute="top" secondItem="PpN-6h-bnL" secondAttribute="bottom" constant="40" id="kat-lQ-R6M"/>
                             <constraint firstItem="PpN-6h-bnL" firstAttribute="top" secondItem="pOf-9S-y4n" secondAttribute="bottom" constant="40" id="mrl-wH-b9R"/>
                         </constraints>
@@ -193,6 +193,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="exerciseGif" destination="pOf-9S-y4n" id="VQj-eD-icZ"/>
+                        <outlet property="pauseButton" destination="YBK-Ht-kDS" id="Drs-Ie-C5M"/>
                         <outlet property="timerLabel" destination="PpN-6h-bnL" id="flF-bc-g3m"/>
                     </connections>
                 </viewController>

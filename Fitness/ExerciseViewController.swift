@@ -34,27 +34,38 @@ class ExerciseViewController: UIViewController {
     private var timer: Timer?
     var isTimeRunning = false
     var resumeTapped = false
+    @IBOutlet weak var pauseButton: UIButton!
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBAction func onStartButton(_ sender: Any) {
         if !isTimeRunning{
             runTimer()
+            isTimeRunning = true
         }
     }
     @IBAction func onPauseButton(_ sender: Any) {
-        if self.resumeTapped == false {
-            timer!.invalidate()
-             self.resumeTapped = true
-        } else {
-             runTimer()
-             self.resumeTapped = false
+        if isTimeRunning{
+            if self.resumeTapped == false {
+                timer!.invalidate()
+                 self.resumeTapped = true
+                pauseButton.setTitle("Resume", for: .normal)
+            } else {
+                 runTimer()
+                 self.resumeTapped = false
+                pauseButton.setTitle("Pause", for: .normal)
+            }
         }
     }
     @IBAction func onResetButton(_ sender: Any) {
-        timer!.invalidate()
-        seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
-        timerLabel.text = String(seconds)
-        isTimeRunning = false
+        if isTimeRunning{
+            timer!.invalidate()
+            seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
+            timerLabel.text = String(seconds)
+            isTimeRunning = false
+            resumeTapped = false
+            pauseButton.setTitle("Pause", for: .normal)
+
+        }
 
     }
     func runTimer() {
