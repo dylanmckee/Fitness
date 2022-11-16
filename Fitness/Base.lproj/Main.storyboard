@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,7 +73,7 @@
                     <connections>
                         <outlet property="passwordField" destination="Kjf-aM-fs4" id="6Hk-jX-L2U"/>
                         <outlet property="usernameField" destination="bCa-s8-btI" id="U9K-xM-GTO"/>
-                        <segue destination="PbQ-w7-mc8" kind="presentation" identifier="loginSegue" id="rDd-fG-bHN"/>
+                        <segue destination="PbQ-w7-mc8" kind="presentation" identifier="login" id="KUA-BY-76W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -88,19 +89,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afm-hy-0YO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Afm-hy-0YO">
                                 <rect key="frame" x="158" y="317" width="98" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="fyT-aP-XCh"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Button"/>
                                 <connections>
                                     <segue destination="mtU-ro-uS0" kind="presentation" id="PZg-T3-wdq"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAh-oV-fCm">
+                                <rect key="frame" x="0.0" y="92" width="414" height="59"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What do you want to work out today?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Um-5l-CqP">
+                                        <rect key="frame" x="8" y="8" width="314" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select Body Part" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7n-YM-NAB">
+                                        <rect key="frame" x="8" y="39" width="185" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" systemColor="systemGrayColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pGS-WT-FL8">
+                                        <rect key="frame" x="0.0" y="39" width="400" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Selet"/>
+                                        <connections>
+                                            <action selector="tappedDropDownButton:" destination="zZt-48-sko" eventType="touchUpInside" id="OBy-72-ORH"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrowtriangle.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="IHQ-Fl-G0m">
+                                        <rect key="frame" x="365" y="41" width="16.5" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" systemColor="systemGrayColor"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Dva-rO-Xlz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UAh-oV-fCm" firstAttribute="leading" secondItem="Dva-rO-Xlz" secondAttribute="leading" id="0np-fh-du0"/>
+                            <constraint firstItem="Afm-hy-0YO" firstAttribute="centerX" secondItem="UAh-oV-fCm" secondAttribute="centerX" id="Ju7-z9-wRb"/>
+                            <constraint firstItem="Afm-hy-0YO" firstAttribute="leading" secondItem="Dva-rO-Xlz" secondAttribute="leading" constant="158" id="Sgs-BA-pJd"/>
+                            <constraint firstItem="Dva-rO-Xlz" firstAttribute="trailing" secondItem="UAh-oV-fCm" secondAttribute="trailing" id="Wy9-R6-Sto"/>
+                            <constraint firstItem="Dva-rO-Xlz" firstAttribute="bottom" secondItem="Afm-hy-0YO" secondAttribute="bottom" constant="514" id="Ydk-aq-03Z"/>
+                            <constraint firstItem="UAh-oV-fCm" firstAttribute="top" secondItem="Dva-rO-Xlz" secondAttribute="top" id="fbF-oY-Yph"/>
+                            <constraint firstItem="Afm-hy-0YO" firstAttribute="top" secondItem="UAh-oV-fCm" secondAttribute="bottom" constant="60" id="j2g-X3-u9U"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <toolbarItems>
@@ -113,6 +160,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dropDownButton" destination="pGS-WT-FL8" id="0F2-aD-e4h"/>
+                        <outlet property="dropDownView" destination="UAh-oV-fCm" id="roC-hB-zJC"/>
+                        <outlet property="parts_label" destination="W7n-YM-NAB" id="Y9h-wE-ywE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSJ-ER-rsI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -216,7 +268,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vXU-tE-qJc">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -230,11 +282,15 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vK2-i5-JCc"/>
+        <segue reference="q5K-Bz-OxP"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowtriangle.down" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

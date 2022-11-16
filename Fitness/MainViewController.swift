@@ -8,6 +8,7 @@
 import UIKit
 import Parse
 import AlamofireImage
+import DropDown
 
 class MainViewController: UIViewController, UITableViewDelegate {
     
@@ -16,12 +17,38 @@ class MainViewController: UIViewController, UITableViewDelegate {
     var selectedPost : PFObject!
     var posts = [PFObject]()
     
-
+    let myDropDown = DropDown()
+    let partsArray = ["Back", "Chest", "Legs", "Biceps", "Shoulders"]
+    
+    @IBOutlet weak var dropDownButton: UIButton!
+    @IBOutlet weak var parts_label: UILabel!
+    @IBOutlet weak var dropDownView: UIView!
+    
+    @IBAction func tappedDropDownButton(_ sender: Any) {
+        myDropDown.show()
+        print((self.parts_label.text ?? "select") as String)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
- 
+        
+        myDropDown.anchorView = dropDownView
+        myDropDown.dataSource = partsArray
+        
+        myDropDown.bottomOffset = CGPoint(x: 0, y: (myDropDown.anchorView?.plainView.bounds.height)!)
+        myDropDown.topOffset = CGPoint(x: 0, y: -(myDropDown.anchorView?.plainView.bounds.height)!)
+        myDropDown.direction = .bottom
+        
+        myDropDown.selectionAction = { (index: Int, item: String) in
+            self.parts_label.text = self.partsArray[index]
+            self.parts_label.textColor = .black
+            
+        }
+  
+        
+        
     }
     
     @objc func keyboardWillBeHidden(note: Notification) {
@@ -43,6 +70,7 @@ class MainViewController: UIViewController, UITableViewDelegate {
     @IBOutlet var onLogoutButton: UIView!
     
     @IBAction func onLogoutButton(_ sender: UIButton) {
+        PFUser.logOut()
         let main = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = main.instantiateViewController(withIdentifier: "LoginViewController")
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
