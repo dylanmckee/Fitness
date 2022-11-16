@@ -17,6 +17,7 @@
 		335568EB28FC844600BA79AA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335568EA28FC844600BA79AA /* MainViewController.swift */; };
 		335BA304291C8156003B5B0A /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BA303291C8156003B5B0A /* iOSDevCenters+GIF.swift */; };
 		335BA306291C83D2003B5B0A /* ExerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335BA305291C83D2003B5B0A /* ExerciseViewController.swift */; };
+		335BA30C292490C7003B5B0A /* alarm.wav in Resources */ = {isa = PBXBuildFile; fileRef = 335BA30B292490C6003B5B0A /* alarm.wav */; };
 		5E9574B6DCD1F2B37CE70A42 /* Pods_Fitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8A05B4E97055F3FE0F21FA /* Pods_Fitness.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		335568EA28FC844600BA79AA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		335BA303291C8156003B5B0A /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
 		335BA305291C83D2003B5B0A /* ExerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewController.swift; sourceTree = "<group>"; };
+		335BA30B292490C6003B5B0A /* alarm.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = alarm.wav; sourceTree = "<group>"; };
 		9EB1B2C7BF1A0BF6C8CEDC1E /* Pods-Fitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness.debug.xcconfig"; path = "Target Support Files/Pods-Fitness/Pods-Fitness.debug.xcconfig"; sourceTree = "<group>"; };
 		CB8A05B4E97055F3FE0F21FA /* Pods_Fitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD18ADB7BC0A54BC0FB89070 /* Pods-Fitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness.release.xcconfig"; path = "Target Support Files/Pods-Fitness/Pods-Fitness.release.xcconfig"; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 		335568C828FC82F200BA79AA = {
 			isa = PBXGroup;
 			children = (
+				335BA30B292490C6003B5B0A /* alarm.wav */,
 				335568D328FC82F200BA79AA /* Fitness */,
 				335568D228FC82F200BA79AA /* Products */,
 				DCD3C82DBB154A5DE6859406 /* Pods */,
@@ -163,6 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335BA30C292490C7003B5B0A /* alarm.wav in Resources */,
 				335568E128FC82F300BA79AA /* LaunchScreen.storyboard in Resources */,
 				335568DE28FC82F300BA79AA /* Assets.xcassets in Resources */,
 				335568DC28FC82F200BA79AA /* Main.storyboard in Resources */,
