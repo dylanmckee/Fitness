@@ -10,4 +10,5 @@ target 'Fitness' do
  	pod 'Parse'
  	pod 'AlamofireImage'
 	pod 'JellyGif'
+	pod 'DropDown'
 end
