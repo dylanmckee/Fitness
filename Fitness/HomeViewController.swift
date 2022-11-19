@@ -6,28 +6,28 @@
 //
 
 import UIKit
+import Parse
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var table: UITableView!
     
-    struct Gym{
-        let title : String
-        let imageName : String
+    struct gym{
+        let title:String
+        let imageName:String
     }
     
-    let data : [Gym] = [
-        Gym(title: "Chest", imageName: "chest"),
-        Gym(title: "Back", imageName: "back"),
-        Gym(title: "Arms", imageName: "arm"),
-        Gym(title: "Legs", imageName: "legs")
+    let data:[gym] = [
+        gym(title: "Chest", imageName: "chest"),
+        gym(title: "Back", imageName: "back"),
+        gym(title: "Arms", imageName: "arm"),
+        gym(title: "Legs", imageName: "legs")
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableview.dataSource = self
-        tableview.delegate = self
-        // Do any additional setup after loading the view.
+        table.dataSource = self
+        table.delegate = self
     }
     
     
@@ -37,9 +37,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let gym = data[indexPath.row]
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
-        cell.imageIcon.image = UIImage(named: gym.imageName)
+        let cell = table.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
         cell.label.text = gym.title
+        cell.imageIconView.image = UIImage(named: gym.imageName)
         return cell
     }
     
@@ -47,15 +47,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 260
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func onLogout(_ sender: Any) {
+        PFUser.logOut()
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = main.instantiateViewController(withIdentifier: "LoginViewController")
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
+        delegate.window?.rootViewController = loginViewController
     }
-    */
-
+    
+    
 }
