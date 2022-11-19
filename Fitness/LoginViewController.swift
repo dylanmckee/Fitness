@@ -9,18 +9,29 @@ import UIKit
 import Parse
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
     
-    @IBAction func onSignIn(_ sender: Any) {
-        let username = usernameField.text!
-        let password = passwordField.text!
+    @IBOutlet weak var usernameSignup: UITextField!
+    @IBOutlet weak var nameSignup: UITextField!
+    @IBOutlet weak var weightSignup: UITextField!
+    @IBOutlet weak var passwordSignup: UITextField!
+    
+    
+    
+    @IBOutlet weak var usernameSignin: UITextField!
+    @IBOutlet weak var passwordSignin: UITextField!
+    
+
+    @IBAction func onSignin(_ sender: Any) {
+        let username = usernameSignin.text!
+        let password = passwordSignin.text!
         
         PFUser.logInWithUsername(inBackground: username, password: password)
         { (user, error) in
             if user != nil {
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                let main = UIStoryboard(name: "Main", bundle: nil)
+                                let loginViewController = main.instantiateViewController(withIdentifier: "tabBarController")
+                                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
+                                delegate.window?.rootViewController = loginViewController
             }
             else{
                 print("Error: \(String(describing: error?.localizedDescription))")
@@ -28,23 +39,25 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func onSignUp(_ sender: Any) {
+    
+    @IBAction func onSignup(_ sender: Any) {
         var user = PFUser()
-        user.username = usernameField.text
-        user.password = passwordField.text
+        user.username = usernameSignup.text
+        user.password = passwordSignup.text
+        user["name"] = nameSignup.text
+        user["weight"] = weightSignup.text
+        
         user.signUpInBackground{ (success, error) in
-        if success {
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-            
+            if success {
+                let main = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = main.instantiateViewController(withIdentifier: "tabBarController")
+                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
+                delegate.window?.rootViewController = loginViewController
+                
+            }
         }
-        else{
-            print("Error: \(String(describing: error?.localizedDescription))")
-        }
-        
-        }
-        
-        
     }
+    
     
     
     override func viewDidLoad() {

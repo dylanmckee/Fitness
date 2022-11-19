@@ -1,4 +1,4 @@
-//
+//"
 //  ExerciseViewController.swift
 //  Fitness
 //
@@ -11,7 +11,8 @@ import AVFoundation
 
 class ExerciseViewController: UIViewController {
 
-
+    var sound_effect : AVAudioPlayer?
+    @IBOutlet weak var timeInput: UITextField!
     @IBOutlet weak var exerciseGif: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,7 @@ class ExerciseViewController: UIViewController {
         view.addSubview(imageView)
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Back", style: .plain, target: nil, action: nil)
-
+        
 //        let url = URL(string: gifURL)!
 //        let imageView2 = JellyGifImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
@@ -30,54 +31,98 @@ class ExerciseViewController: UIViewController {
         //imageView.af.setImage(withURL: url)
         // Do any additional setup after loading the view.
     }
-    var seconds = 60
+    var starting_time = 70
+    var seconds = 70
     private var timer: Timer?
     var isTimeRunning = false
     var resumeTapped = false
+    @IBOutlet weak var pauseButton: UIButton!
     
     @IBOutlet weak var timerLabel: UILabel!
     @IBAction func onStartButton(_ sender: Any) {
         if !isTimeRunning{
-            runTimer()
+            if timeInput.hasText{ //validate input
+               // validate that input was integer
+                if let st = Int(timeInput.text!){
+                    starting_time = st*60
+                    seconds = st*60
+                    setTimerLabel()
+                    runTimer()
+                }
+                else{
+                    print("Not an integer")
+                }
+            }
+            else{
+                print("No time entered")
+            }
         }
     }
     @IBAction func onPauseButton(_ sender: Any) {
-        if self.resumeTapped == false {
-            timer!.invalidate()
-             self.resumeTapped = true
-        } else {
-             runTimer()
-             self.resumeTapped = false
+        if isTimeRunning{
+            if self.resumeTapped == false {
+                timer!.invalidate()
+                 self.resumeTapped = true
+                pauseButton.setTitle("Resume", for: .normal)
+            } else {
+                 runTimer()
+                 self.resumeTapped = false
+                pauseButton.setTitle("Pause", for: .normal)
+            }
         }
     }
     @IBAction func onResetButton(_ sender: Any) {
-        timer!.invalidate()
-        seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
-        timerLabel.text = String(seconds)
-        isTimeRunning = false
+        if isTimeRunning{
+            timer!.invalidate()
+            seconds = starting_time   //reset time
+            setTimerLabel()
+            isTimeRunning = false
+            resumeTapped = false
+            pauseButton.setTitle("Pause", for: .normal)
+
+        }
 
     }
     func runTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self,   selector: (#selector(ExerciseViewController.updateTimer)), userInfo: nil, repeats: true)
         isTimeRunning = true
     }
+    
     @objc func updateTimer() {
+        
+        seconds -= 1     //Decrement
+        setTimerLabel()
+        // call alarm
         if seconds <= 0{
             self.timer?.invalidate()
             playAlarm()
         }
-        seconds -= 1     //This will decrement(count down)the seconds.
-        timerLabel.text = String(seconds) //This will update the label.
     }
 
     func playAlarm(){
-        let url = URL(fileURLWithPath: "/System/Library/Audio/UISounds/sms-received5.caf")
+        let path = Bundle.main.path(forResource: "alarm.wav", ofType: nil)!
+        let url = URL(fileURLWithPath: path)
         do {
-            let reps_sound_effect = try AVAudioPlayer(contentsOf: url)
-            reps_sound_effect.play()
-        } catch {
+             sound_effect = try AVAudioPlayer(contentsOf: url)
+            sound_effect?.play()
+
+    } catch {
             print("Error!")
         }
+    }
+    
+    func setTimerLabel(){
+        // get minutes and seconds for display
+        let minutes = seconds/60
+        let leftover_seconds = seconds % 60
+        var string_leftover_seconds = ""
+        string_leftover_seconds = String(leftover_seconds)
+        //add leading 0 for < 10 seconds
+        if leftover_seconds < 10{
+            string_leftover_seconds = "0" + String(leftover_seconds)
+        }
+        // set label
+        timerLabel.text = String(minutes) + "  :  " + string_leftover_seconds
         
     }
     /*
