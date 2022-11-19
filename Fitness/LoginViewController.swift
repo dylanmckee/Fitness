@@ -9,13 +9,21 @@ import UIKit
 import Parse
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
     
-    @IBAction func onSignIn(_ sender: Any) {
-        let username = usernameField.text!
-        let password = passwordField.text!
+    @IBOutlet weak var usernameSignup: UITextField!
+    @IBOutlet weak var nameSignup: UITextField!
+    @IBOutlet weak var weightSignup: UITextField!
+    @IBOutlet weak var passwordSignup: UITextField!
+    
+    
+    
+    @IBOutlet weak var usernameSignin: UITextField!
+    @IBOutlet weak var passwordSignin: UITextField!
+    
+
+    @IBAction func onSignin(_ sender: Any) {
+        let username = usernameSignin.text!
+        let password = passwordSignin.text!
         
         PFUser.logInWithUsername(inBackground: username, password: password)
         { (user, error) in
@@ -28,23 +36,26 @@ class LoginViewController: UIViewController {
         }
     }
     
-    @IBAction func onSignUp(_ sender: Any) {
+    
+    @IBAction func onSignup(_ sender: Any) {
         var user = PFUser()
-        user.username = usernameField.text
-        user.password = passwordField.text
+        user.username = usernameSignup.text
+        user.password = passwordSignup.text
+        user["name"] = nameSignup.text
+        user["weight"] = weightSignup.text
+        
         user.signUpInBackground{ (success, error) in
-        if success {
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            if success {
+                self.performSegue(withIdentifier: "SignupSegue", sender: nil)
+                
+            }
+            else{
+                print("Error: \(String(describing: error?.localizedDescription))")
+            }
             
         }
-        else{
-            print("Error: \(String(describing: error?.localizedDescription))")
-        }
-        
-        }
-        
-        
     }
+    
     
     
     override func viewDidLoad() {
