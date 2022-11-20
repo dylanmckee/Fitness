@@ -28,10 +28,7 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsername(inBackground: username, password: password)
         { (user, error) in
             if user != nil {
-                let main = UIStoryboard(name: "Main", bundle: nil)
-                                let loginViewController = main.instantiateViewController(withIdentifier: "tabBarController")
-                                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
-                                delegate.window?.rootViewController = loginViewController
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
             else{
                 print("Error: \(String(describing: error?.localizedDescription))")
@@ -49,12 +46,13 @@ class LoginViewController: UIViewController {
         
         user.signUpInBackground{ (success, error) in
             if success {
-                let main = UIStoryboard(name: "Main", bundle: nil)
-                let loginViewController = main.instantiateViewController(withIdentifier: "tabBarController")
-                guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
-                delegate.window?.rootViewController = loginViewController
+                self.performSegue(withIdentifier: "SignupSegue", sender: nil)
                 
             }
+            else{
+                print("Error: \(String(describing: error?.localizedDescription))")
+            }
+            
         }
     }
     
