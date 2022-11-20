@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let imageName:String
     }
     
+    
     let data:[gym] = [
         gym(title: "Chest", imageName: "chest"),
         gym(title: "Back", imageName: "back"),
@@ -24,10 +25,44 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         gym(title: "Legs", imageName: "legs")
     ]
     
+    var currentLbs = ""
+    var currentName = ""
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
+    
+    @IBOutlet weak var weightLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         table.dataSource = self
         table.delegate = self
+        
+        let query  = PFQuery(className: "_User")
+        query.includeKeys(["name","weight"])
+        
+        query.findObjectsInBackground{(posts,error) in
+            if posts != nil{
+               // let user = posts["username"] as! String
+                for i in 0...posts!.count - 1{
+                    if posts?[i]["username"] as? String == PFUser.current()?.username!{
+                        self.currentName = posts?[i]["username"] as! String
+                        self.currentLbs =  posts?[i]["weight"] as! String
+                        self.nameLabel.text = "Welcome " +  self.currentName
+                        self.weightLabel.text = self.currentLbs + " lbs"
+                    }
+                }
+                    
+                
+            }
+            
+        }
+
+       
+
     }
     
     
@@ -51,7 +86,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func onLogout(_ sender: Any) {
         PFUser.logOut()
         let main = UIStoryboard(name: "Main", bundle: nil)
-        let loginViewController = main.instantiateViewController(withIdentifier: "LoginViewController")
+        let loginViewController = main.instantiateViewController(withIdentifier: "loginScreen")
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
         delegate.window?.rootViewController = loginViewController
     }
