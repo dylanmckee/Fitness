@@ -27,7 +27,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var currentLbs = ""
     var currentName = ""
-    
+    var bodyPartIndex = 0
     @IBOutlet weak var nameLabel: UILabel!
     
     
@@ -55,17 +55,25 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         self.weightLabel.text = self.currentLbs + " lbs"
                     }
                 }
-                    
-                
             }
-            
         }
-
-       
-
     }
     
+    // method to run when table view cell is tapped
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Set index 0-3 of table view that was selected
+       bodyPartIndex = indexPath[1]
+        self.performSegue(withIdentifier: "homeToMain", sender: self)
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+    if segue.destination is MainViewController {
+        let vc = segue.destination as? MainViewController
+        //send bodyPart to MainViewController
+        vc?.bodyPart = data[bodyPartIndex].imageName
+        }
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }

@@ -12,32 +12,38 @@ import AVFoundation
 class ExerciseViewController: UIViewController {
 
     var sound_effect : AVAudioPlayer?
+    var exerciseID = String()
     @IBOutlet weak var timeInput: UITextField!
     @IBOutlet weak var exerciseGif: UIImageView!
+    var starting_time = 70
+    var seconds = 70
+    private var timer: Timer?
+    var isTimeRunning = false
+    var resumeTapped = false
+    var exerciseName = String()
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        let gifURL : String = "https://d205bpvrqc9yn1.cloudfront.net/0001.gif"
+        print(exerciseName, exerciseID)
+        let gifURL = "https://d205bpvrqc9yn1.cloudfront.net/" + exerciseID + ".gif"
         let imageURL = UIImage.gifImageWithURL(gifURL)
         let imageView = UIImageView(image: imageURL)
         imageView.frame = CGRect(x:20.0,y:390.0, width: self.view.frame.size.width - 90, height: 200.0)
         view.addSubview(imageView)
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Back", style: .plain, target: nil, action: nil)
-        
-//        let url = URL(string: gifURL)!
-//        let imageView2 = JellyGifImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-       // imageView2.startGif(with: .localPath(url))
-        //imageView.af.setImage(withURL: url)
-        // Do any additional setup after loading the view.
     }
-    var starting_time = 70
-    var seconds = 70
-    private var timer: Timer?
-    var isTimeRunning = false
-    var resumeTapped = false
-    @IBOutlet weak var pauseButton: UIButton!
     
+    func getURL() -> String {
+        let url = ""
+        
+        return url
+    }
+
+    @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBAction func onStartButton(_ sender: Any) {
         if !isTimeRunning{
@@ -124,6 +130,13 @@ class ExerciseViewController: UIViewController {
         // set label
         timerLabel.text = String(minutes) + "  :  " + string_leftover_seconds
         
+    }
+
+    @IBAction func onBackButton(_ sender: Any) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let mainView = main.instantiateViewController(withIdentifier: "MainNavigationController")
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
+        delegate.window?.rootViewController = mainView
     }
     /*
     // MARK: - Navigation
