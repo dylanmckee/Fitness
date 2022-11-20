@@ -21,6 +21,7 @@
 		5E9574B6DCD1F2B37CE70A42 /* Pods_Fitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB8A05B4E97055F3FE0F21FA /* Pods_Fitness.framework */; };
 		A204875929285F2600E0409E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A204875829285F2600E0409E /* HomeViewController.swift */; };
 		A204875B2928621900E0409E /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A204875A2928621900E0409E /* CustomTableViewCell.swift */; };
+		E2E70BD6292984B10069B010 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E70BD5292984B10069B010 /* HistoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		A204875A2928621900E0409E /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		CB8A05B4E97055F3FE0F21FA /* Pods_Fitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD18ADB7BC0A54BC0FB89070 /* Pods-Fitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness.release.xcconfig"; path = "Target Support Files/Pods-Fitness/Pods-Fitness.release.xcconfig"; sourceTree = "<group>"; };
+		E2E70BD5292984B10069B010 /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				335BA305291C83D2003B5B0A /* ExerciseViewController.swift */,
 				A204875829285F2600E0409E /* HomeViewController.swift */,
 				A204875A2928621900E0409E /* CustomTableViewCell.swift */,
+				E2E70BD5292984B10069B010 /* HistoryViewController.swift */,
 			);
 			path = Fitness;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 				A204875B2928621900E0409E /* CustomTableViewCell.swift in Sources */,
 				335568E928FC843200BA79AA /* LoginViewController.swift in Sources */,
 				335BA306291C83D2003B5B0A /* ExerciseViewController.swift in Sources */,
+				E2E70BD6292984B10069B010 /* HistoryViewController.swift in Sources */,
 				335BA304291C8156003B5B0A /* iOSDevCenters+GIF.swift in Sources */,
 				A204875929285F2600E0409E /* HomeViewController.swift in Sources */,
 				335568D928FC82F200BA79AA /* ViewController.swift in Sources */,
