@@ -8,6 +8,7 @@
 import UIKit
 import JellyGif
 import AVFoundation
+import Parse
 
 class ExerciseViewController: UIViewController {
 
@@ -21,6 +22,14 @@ class ExerciseViewController: UIViewController {
     var isTimeRunning = false
     var resumeTapped = false
     var exerciseName = String()
+    let date = Date()
+    var foundDate = false
+    let dateFormatter = DateFormatter()
+    
+    var currentDate = ""
+    
+
+
     
     
     override func viewDidLoad() {
@@ -34,7 +43,30 @@ class ExerciseViewController: UIViewController {
         view.addSubview(imageView)
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Back", style: .plain, target: nil, action: nil)
-
+        
+        self.dateFormatter.dateFormat = "dd/MM/yyyy"
+        self.currentDate = self.dateFormatter.string(from: date)
+        
+        let query  = PFQuery(className: "History")
+        query.includeKeys(["date"])
+        
+        query.findObjectsInBackground{ (success,error) in
+            if success != nil{
+                if success?.count != 0{
+                    for i in 0...success!.count - 1{
+                        if success?[i]["date"] as! String == self.currentDate && self.foundDate == false{
+                            self.foundDate  = true
+                            
+                        }
+                        
+                    }
+                }
+            }
+            
+            }
+        
+        
+    
     }
     
     func getURL() -> String {
@@ -133,10 +165,87 @@ class ExerciseViewController: UIViewController {
     }
 
     @IBAction func onBackButton(_ sender: Any) {
+        
         let main = UIStoryboard(name: "Main", bundle: nil)
-        let mainView = main.instantiateViewController(withIdentifier: "MainNavigationController")
+        let mainView = main.instantiateViewController(withIdentifier: "tabBarController")
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
         delegate.window?.rootViewController = mainView
+
+        }
+    
+    
+    @IBAction func doneButton(_ sender: Any) {
+        
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let mainView = main.instantiateViewController(withIdentifier: "tabBarController")
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
+        delegate.window?.rootViewController = mainView
+
+        
+        
+        if self.foundDate == false{
+            let post = PFObject(className: "History")
+            post["author"] = PFUser.current()!
+            post["date"] = currentDate
+            post["exercise"] = exerciseName
+            post["workouts"] = [exerciseName]
+            post["times"] = [String(starting_time / 60)]
+            post.saveInBackground{ (success, error) in
+                if success{
+                    print("saved")
+                    self.dismiss(animated: true,completion: nil)
+                }else{
+                    print("error!")
+                }
+                
+            }
+            
+        }else{
+            
+            let query  = PFQuery(className: "History")
+            query.includeKeys(["workout"])
+            
+            query.findObjectsInBackground{ (success,error) in
+                if success != nil{
+                    
+                    for i in 0...success!.count - 1{
+                        var workouts: [String] = []
+                        var times : [String] = []
+                        if success?[i]["date"] as! String == self.currentDate{
+                            
+                            workouts = success?[i]["workouts"] as! [String]
+                            workouts.append(self.exerciseName)
+                            
+                          
+                            times = success?[i]["times"] as! [String]
+                            times.append(String(self.starting_time/60))
+                            
+                            
+                            success?[i]["workouts"] = workouts
+                            success?[i]["times"] = times
+                            
+                            
+                            success?[i].saveInBackground()
+                            
+                        }
+                            
+                        }
+                       
+                        }
+                    }
+            }
+        
+        
+        
+        
+    }
+    
+
+
+        
+        
+        
+    
     }
     /*
     // MARK: - Navigation
@@ -148,4 +257,4 @@ class ExerciseViewController: UIViewController {
     }
     */
 
-}
+
