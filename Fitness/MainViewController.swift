@@ -66,7 +66,7 @@ class MainViewController: UIViewController, UITableViewDelegate {
     func GETRequest(){
         let url = "https://exercisedb.p.rapidapi.com/exercises/bodyPart/" + ((partsDict[bodyPart])!)
         let headers = [
-            "X-RapidAPI-Key": "f3a6f8a9d8msh00975fdcc1e2d68p141159jsnc026cd9f7459",
+            "X-RapidAPI-Key": "9ef2693911mshe6efc8d59c5c302p19d6adjsn5da9a582f54e",
             "X-RapidAPI-Host": "exercisedb.p.rapidapi.com"
         ]
 
