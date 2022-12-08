@@ -37,7 +37,8 @@ class MainViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var secondDropDownView: UIView!
     @IBAction func tappedDropDownButton(_ sender: Any) {
         secondDropDown.show()
-        let selected = (self.parts_label.text ?? "select") as String
+        var selected = (self.parts_label.text ?? "select") as String
+        selected = selected.lowercased()
         createExerciseArray(e: selected)
     }
     
@@ -49,15 +50,18 @@ class MainViewController: UIViewController, UITableViewDelegate {
         GETRequest()
         sleep(1)
         equipmentList.sort()
+        var equipmentListDD = [String]()
+        for i in equipmentList.indices{
+            equipmentListDD.append(equipmentList[i].capitalized)
+        }
         myDropDown.anchorView = dropDownView
-        myDropDown.dataSource = equipmentList
-        
+        myDropDown.dataSource = equipmentListDD
         myDropDown.bottomOffset = CGPoint(x: 0, y: (myDropDown.anchorView?.plainView.bounds.height)!)
         myDropDown.topOffset = CGPoint(x: 0, y: -(myDropDown.anchorView?.plainView.bounds.height)!)
         myDropDown.direction = .bottom
-        
+
         myDropDown.selectionAction = { (index: Int, item: String) in
-            self.parts_label.text = self.equipmentList[index]
+            self.parts_label.text = self.equipmentList[index].capitalized
             self.parts_label.textColor = .black
     
         }
@@ -103,19 +107,23 @@ class MainViewController: UIViewController, UITableViewDelegate {
         var exerciseArray = [String]()
         for i in jsonArray{
             if i["equipment"] as! String  == e {
-                exerciseArray.append(i["name"] as! String )
+                exerciseArray.append(i["name"] as! String)
                 exerciseAndID[i["name"] as! String] = (i["id"] as! String)
                 
             }
         }
+        var exerciseArrayDD = [String]()
+        for i in exerciseArray.indices{
+            exerciseArrayDD.append(exerciseArray[i].capitalized)
+        }
         secondDropDown.anchorView = secondDropDownView
-        secondDropDown.dataSource = exerciseArray
+        secondDropDown.dataSource = exerciseArrayDD
         
         secondDropDown.bottomOffset = CGPoint(x: 0, y: (secondDropDown.anchorView?.plainView.bounds.height)!)
         secondDropDown.topOffset = CGPoint(x: 0, y: -(secondDropDown.anchorView?.plainView.bounds.height)!)
         secondDropDown.direction = .bottom
         secondDropDown.selectionAction = { (index: Int, item: String) in
-            self.workoutButton.text = exerciseArray[index]
+            self.workoutButton.text = exerciseArrayDD[index]
             self.workoutButton.textColor = .black
     
         }
@@ -123,6 +131,7 @@ class MainViewController: UIViewController, UITableViewDelegate {
     @IBAction func tappedSecondDropDown(_ sender: Any) {
         myDropDown.show()
         selectedWorkout = (self.workoutButton.text ?? "select") as String
+        selectedWorkout = selectedWorkout.lowercased()
 
     }
     @IBAction func onButtonClick(_ sender: Any) {
@@ -167,8 +176,9 @@ class MainViewController: UIViewController, UITableViewDelegate {
         //send bodyPart to MainViewController
     
         selectedWorkout = (self.workoutButton.text ?? "select") as String
-        vc?.exerciseName = selectedWorkout
-        vc?.exerciseID = exerciseAndID[selectedWorkout] ?? "-1"
+        vc?.exerciseName = selectedWorkout.lowercased()
+        
+        vc?.exerciseID = exerciseAndID[selectedWorkout.lowercased()] ?? "-1"
         }
     }
     
