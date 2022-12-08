@@ -28,7 +28,8 @@ class ExerciseViewController: UIViewController {
     
     var currentDate = ""
     
-
+    @IBOutlet weak var exerciseLabel: UILabel!
+    
 
     
     
@@ -36,6 +37,7 @@ class ExerciseViewController: UIViewController {
         
         super.viewDidLoad()
         print(exerciseName, exerciseID)
+        exerciseLabel.text = exerciseName.capitalized
         let gifURL = "https://d205bpvrqc9yn1.cloudfront.net/" + exerciseID + ".gif"
         let imageURL = UIImage.gifImageWithURL(gifURL)
         let imageView = UIImageView(image: imageURL)
