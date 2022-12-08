@@ -37,9 +37,9 @@ class MainViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var secondDropDownView: UIView!
     @IBAction func tappedDropDownButton(_ sender: Any) {
         secondDropDown.show()
-        var selected = (self.parts_label.text ?? "select") as String
-        selected = selected.lowercased()
-        createExerciseArray(e: selected)
+       // var selected = (self.parts_label.text ?? "select") as String
+       // selected = selected.lowercased()
+       // createExerciseArray(e: selected)
     }
     
     
@@ -63,8 +63,10 @@ class MainViewController: UIViewController, UITableViewDelegate {
         myDropDown.selectionAction = { (index: Int, item: String) in
             self.parts_label.text = self.equipmentList[index].capitalized
             self.parts_label.textColor = .black
+            self.createExerciseArray(e: self.equipmentList[index])
     
         }
+    
         
     }
     func GETRequest(){
