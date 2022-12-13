@@ -39,7 +39,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
 
                     
             }
-                
+            self.historyTable.reverse()
         }
         
         
