@@ -176,14 +176,11 @@ class ExerciseViewController: UIViewController {
         }
     
     
-    @IBAction func doneButton(_ sender: Any) {
-        
+    @IBAction func onDoneButton(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let mainView = main.instantiateViewController(withIdentifier: "tabBarController")
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let delegate = windowScene.delegate as? SceneDelegate else { return }
         delegate.window?.rootViewController = mainView
-
-        
         
         if self.foundDate == false{
             let post = PFObject(className: "History")
@@ -199,11 +196,8 @@ class ExerciseViewController: UIViewController {
                 }else{
                     print("error!")
                 }
-                
             }
-            
         }else{
-            
             let query  = PFQuery(className: "History")
             query.includeKeys(["workout"])
             
@@ -229,25 +223,14 @@ class ExerciseViewController: UIViewController {
                             
                             success?[i].saveInBackground()
                             
-                        }
-                            
-                        }
-                       
+                            }
                         }
                     }
+                }
             }
-        
-        
-        
-        
+
     }
-    
 
-
-        
-        
-        
-    
     }
     /*
     // MARK: - Navigation
